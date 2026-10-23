@@ -19,8 +19,7 @@ il precedente è chiuso davvero. Le date sono indicative.
   modificabile solo con pull request che passano i test.
 - [x] **P03 — Censimento delle fonti:** per ogni fonte una chiamata vera; endpoint, frequenza,
   inizio dello storico, limiti e come citarla, in [`fonti/`](fonti/README.md). *(23/10/2026: 14
-  fonti censite; 11 rispondono, SoSoValue attende la chiave gratuita, Farside e Google Trends non
-  sono utilizzabili da script.)*
+  fonti censite; 12 rispondono; Farside e Google Trends non sono utilizzabili da script.)*
 - [ ] **P04 — Scheletro del codice:** progetto Python, formato dell'archivio «come era noto»
   (Parquet + DuckDB), test automatici.
 - [ ] **P05 — Server del progetto:** i raccoglitori girano da soli, con controllo di salute.

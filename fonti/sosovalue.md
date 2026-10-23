@@ -1,23 +1,26 @@
 # SoSoValue — flussi degli ETF spot
 
-**Esito: in attesa della chiave.** Verificato il 23/10/2026.
+**Esito: funziona con la chiave gratuita.** Verificato il 23/10/2026.
 
 | | |
 |---|---|
-| Indirizzo | `https://openapi.sosovalue.com/openapi/v2/etf/historicalInflowChart` (POST) |
-| Chiave | **Sì, gratuita**, da richiedere sul sito di SoSoValue; va nell'intestazione `x-soso-api-key` |
-| Cosa risponde senza chiave valida | HTTP 401 `{"code":400101,"message":"API Key is invalid or does not exist…"}`: l'endpoint esiste, manca solo la chiave |
-| Cosa darà (dalla documentazione) | flussi netti giornalieri degli ETF spot Bitcoin, totali e per fondo |
-| Limiti | da misurare dopo l'arrivo della chiave |
+| Indirizzo | `POST https://openapi.sosovalue.com/openapi/v2/etf/historicalInflowChart` con corpo `{"type":"us-btc-spot"}` |
+| Chiave | **Sì**, si chiede su `https://sosovalue.com/developer/dashboard` («Apply your Key», approvazione non immediata); va nell'intestazione `x-soso-api-key` e in `SOSOVALUE_API_KEY` nel proprio `.env` |
+| Cosa dà | per ogni giorno: flusso netto (`totalNetInflow`), volume scambiato, patrimonio netto degli ETF, flusso cumulato, tutti in dollari |
+| Frequenza | giornaliera (ultimo giorno al 23/10: 22/10) |
+| Storico | **300 giorni per chiamata**: dal 14/08/2025 al 22/10/2026. Gli ETF spot esistono dal gennaio 2024, quindi per risalire oltre serve verificare se l'endpoint accetta un intervallo (da fare in P22) o altra fonte |
+| Limiti | **100 richieste al minuto e 10.000 al mese** (verificato nelle intestazioni `x-ratelimit-*` della risposta; la documentazione parla di numeri diversi: contano quelli reali) |
 
-## Per chiudere questa scheda
+Per i flussi giornalieri bastano poche chiamate al giorno: i limiti non sono un problema.
 
-1. Ottenere la chiave gratuita e metterla in `SOSOVALUE_API_KEY` nel proprio `.env`.
-2. Rifare la chiamata, salvare la risposta in `esempi/sosovalue.json`, annotare storico (data
-   del primo flusso) e limiti, sostituire questa nota.
+## Nota sulla versione dell'API
 
-Finché manca, i flussi ETF non sono recuperabili in modo automatico (vedi [farside.md](farside.md)).
+La documentazione ufficiale indica `/openapi/v1`; la chiamata qui sopra, su `/openapi/v2`, risponde
+correttamente. I raccoglitori dovranno controllare ogni giorno che la forma della risposta non
+cambi.
 
 ## Come citarla
 
-«Dati: SoSoValue.» (da confermare con le loro condizioni quando la chiave è attiva)
+«Dati: SoSoValue.» (condizioni d'uso da rileggere sul sito prima della pubblicazione)
+
+Esempio: [esempi/sosovalue.json](esempi/sosovalue.json)
