@@ -1,0 +1,11 @@
+{
+  "richiesta": "https://bitcoin-data.com/v1/mvrv-zscore/last",
+  "data_censimento": "2026-10-23",
+  "risposta": {
+    "d": "2026-10-16",
+    "unixTs": 1792108800,
+    "mvrvZscore": 0.9227,
+    "delayed": true,
+    "message": "Real-time data (last 7 days) requires an active subscription. https://bitcoin-data.com/bguser/pricing"
+  }
+}

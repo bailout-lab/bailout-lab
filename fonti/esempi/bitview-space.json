@@ -1,0 +1,135 @@
+{
+  "richiesta": {
+    "health": "https://bitview.space/health",
+    "mvrv": "https://bitview.space/api/series/mvrv/day1?start=2026-10-20&end=2026-10-23",
+    "realized_price": "https://bitview.space/api/series/realized_price/day1?start=2026-10-20&end=2026-10-23",
+    "sopr_24h": "https://bitview.space/api/series/sopr_24h/day1?start=2026-10-20&end=2026-10-23",
+    "nupl": "https://bitview.space/api/series/nupl/day1?start=2026-10-20&end=2026-10-23",
+    "puell_multiple": "https://bitview.space/api/series/puell_multiple/day1?start=2026-10-20&end=2026-10-23",
+    "reserve_risk": "https://bitview.space/api/series/reserve_risk/day1?start=2026-10-20&end=2026-10-23",
+    "rhodl_ratio": "https://bitview.space/api/series/rhodl_ratio/day1?start=2026-10-20&end=2026-10-23",
+    "hash_rate": "https://bitview.space/api/series/hash_rate/day1?start=2026-10-20&end=2026-10-23"
+  },
+  "data_censimento": "2026-10-23",
+  "nota": "Le serie hanno indici diversi: sopr_24h e quelle del giorno rispondono su day1, 'sopr' solo su height.",
+  "risposta": {
+    "health": {
+      "status": "healthy",
+      "service": "brk",
+      "version": "0.12.2",
+      "timestamp": "2026-10-23T19:43:46.495318Z",
+      "started_at": "2026-10-23T11:12:57.565535Z",
+      "uptime_seconds": 30648,
+      "indexed_height": 972825,
+      "computed_height": 972825,
+      "tip_height": 972825,
+      "blocks_behind": 0,
+      "last_indexed_at": "2026-10-23T19:37:18Z",
+      "last_indexed_at_unix": 1792784238
+    },
+    "mvrv": {
+      "version": 4126600656,
+      "index": "day1",
+      "type": "StoredF32",
+      "start": 6501,
+      "end": 6504,
+      "stamp": "2026-10-23T19:43:44Z",
+      "data": [
+        1.539615,
+        1.563291,
+        1.504133
+      ]
+    },
+    "realized_price": {
+      "version": 4126600474,
+      "index": "day1",
+      "type": "Dollars",
+      "start": 6501,
+      "end": 6504,
+      "stamp": "2026-10-23T19:43:45Z",
+      "data": [
+        53892.71,
+        53922.52,
+        54038.9
+      ]
+    },
+    "sopr_24h": {
+      "version": 4126604433,
+      "index": "day1",
+      "type": "StoredF32",
+      "start": 6501,
+      "end": 6504,
+      "stamp": "2026-10-23T19:41:42Z",
+      "data": [
+        1.0033962,
+        1.0084081,
+        1.0271378
+      ]
+    },
+    "nupl": {
+      "version": 4126600662,
+      "index": "day1",
+      "type": "StoredF32",
+      "start": 6501,
+      "end": 6504,
+      "stamp": "2026-10-23T19:43:45Z",
+      "data": [
+        0.350487,
+        0.360324,
+        0.335165
+      ]
+    },
+    "puell_multiple": {
+      "version": 56,
+      "index": "day1",
+      "type": "StoredF32",
+      "start": 6501,
+      "end": 6504,
+      "stamp": "2026-10-23T19:43:45Z",
+      "data": [
+        1.063573,
+        1.08153,
+        1.043929
+      ]
+    },
+    "reserve_risk": {
+      "version": 89,
+      "index": "day1",
+      "type": "StoredF64",
+      "start": 6501,
+      "end": 6504,
+      "stamp": "2026-10-23T19:43:45Z",
+      "data": [
+        4.300504568565446e-06,
+        4.366204383038705e-06,
+        4.207758432540858e-06
+      ]
+    },
+    "rhodl_ratio": {
+      "version": 56,
+      "index": "day1",
+      "type": "StoredF32",
+      "start": 6501,
+      "end": 6504,
+      "stamp": "2026-10-23T19:43:46Z",
+      "data": [
+        0.084936,
+        0.081876,
+        0.081316
+      ]
+    },
+    "hash_rate": {
+      "version": 45,
+      "index": "day1",
+      "type": "StoredF64",
+      "start": 6501,
+      "end": 6504,
+      "stamp": "2026-10-23T19:43:46Z",
+      "data": [
+        1.1530454725826406e+21,
+        1.0971402375483308e+21,
+        8.944837605489577e+20
+      ]
+    }
+  }
+}

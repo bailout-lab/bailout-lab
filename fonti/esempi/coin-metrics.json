@@ -1,0 +1,39 @@
+{
+  "richiesta": "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics?assets=btc&metrics=CapMVRVCur,PriceUSD&frequency=1d&start_time=2026-10-15&page_size=5",
+  "data_censimento": "2026-10-23",
+  "risposta": {
+    "data": [
+      {
+        "asset": "btc",
+        "time": "2026-10-18T00:00:00.000000000Z",
+        "CapMVRVCur": "1.520801782580787928",
+        "PriceUSD": "81935.1692647925"
+      },
+      {
+        "asset": "btc",
+        "time": "2026-10-19T00:00:00.000000000Z",
+        "CapMVRVCur": "1.52007359055895611",
+        "PriceUSD": "81918.1984864816"
+      },
+      {
+        "asset": "btc",
+        "time": "2026-10-20T00:00:00.000000000Z",
+        "CapMVRVCur": "1.537632728433907156",
+        "PriceUSD": "82898.9101560549"
+      },
+      {
+        "asset": "btc",
+        "time": "2026-10-21T00:00:00.000000000Z",
+        "CapMVRVCur": "1.560432062620197082",
+        "PriceUSD": "84176.0796455874"
+      },
+      {
+        "asset": "btc",
+        "time": "2026-10-22T00:00:00.000000000Z",
+        "CapMVRVCur": "1.503104768669490086",
+        "PriceUSD": "81257.0175825248"
+      }
+    ]
+  },
+  "nota": "Il segnalibro di paginazione (next_page_token) è omesso."
+}

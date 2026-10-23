@@ -1,0 +1,42 @@
+{
+  "richiesta": "https://community-api.coinmetrics.io/v4/catalog/assets?assets=btc",
+  "data_censimento": "2026-10-23",
+  "nota": "Elenco accorciato: solo i nomi delle 31 metriche community di BTC.",
+  "risposta": {
+    "asset": "btc",
+    "metriche_community": [
+      "AdrActCnt",
+      "AdrBalCnt",
+      "AssetCompletionTime",
+      "AssetEODCompletionTime",
+      "BlkCnt",
+      "CapMVRVCur",
+      "CapMrktCurUSD",
+      "CapMrktEstUSD",
+      "FeeTotNtv",
+      "FlowInExNtv",
+      "FlowInExUSD",
+      "FlowOutExNtv",
+      "FlowOutExUSD",
+      "HashRate",
+      "IssTotNtv",
+      "IssTotUSD",
+      "PriceBTC",
+      "PriceUSD",
+      "ROI1yr",
+      "ROI30d",
+      "ReferenceRate",
+      "ReferenceRateETH",
+      "ReferenceRateEUR",
+      "ReferenceRateUSD",
+      "SplyCur",
+      "SplyExNtv",
+      "SplyExUSD",
+      "SplyExpFut10yr",
+      "TxCnt",
+      "TxTfrCnt",
+      "volume_reported_spot_usd_1d"
+    ],
+    "numero": 31
+  }
+}
