@@ -51,8 +51,15 @@ class Lavoro:
     tempo_massimo: int = 600
 
 
-# I raccoglitori si aggiungono qui, uno per riga (dal passo P06 della roadmap).
-LAVORI: tuple[Lavoro, ...] = ()
+# I raccoglitori si aggiungono qui, uno per riga. Intervalli contati dall'ultimo inizio: le fonti
+# giornaliere si rileggono ogni poche ore, così un valore arriva presto e un ricalcolo si vede.
+LAVORI: tuple[Lavoro, ...] = (
+    Lavoro("prezzo", "bailout_lab.raccolta.prezzo", timedelta(hours=3)),
+    Lavoro("bitview", "bailout_lab.raccolta.bitview", timedelta(hours=3)),
+    Lavoro("etf", "bailout_lab.raccolta.etf", timedelta(hours=3)),
+    Lavoro("fred", "bailout_lab.raccolta.fred", timedelta(hours=6)),
+    Lavoro("mempool", "bailout_lab.raccolta.mempool", timedelta(hours=6)),
+)
 
 
 def adesso() -> datetime:

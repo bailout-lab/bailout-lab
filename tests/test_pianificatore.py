@@ -87,3 +87,12 @@ def test_comando_salute(tmp_path, monkeypatch):
     assert p.main(["salute"]) == 1
     p.scrivi_json(tmp_path / "salute.json", {"aggiornato": p.adesso().isoformat()})
     assert p.main(["salute"]) == 0
+
+
+def test_i_lavori_registrati_sono_moduli_con_main():
+    import importlib
+
+    nomi = [lav.nome for lav in p.LAVORI]
+    assert len(nomi) == len(set(nomi))
+    for lav in p.LAVORI:
+        assert callable(importlib.import_module(lav.modulo).main)

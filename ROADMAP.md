@@ -29,7 +29,9 @@ il precedente è chiuso davvero. Le date sono indicative.
   scarica il codice da questo repo a un commit preciso; file di salute, riavvio automatico e
   avviso se l'archivio supera 20 GB.)*
 - [ ] **P06 — Prima registrazione «come era noto»:** prezzo giornaliero, macro di base, prime
-  metriche on-chain, fee, flussi ETF. Da qui la registrazione non si spegne più.
+  metriche on-chain, fee, flussi ETF. Da qui la registrazione non si spegne più. *(24/10/2026:
+  cinque raccoglitori scritti e provati sulle fonti vere; il passo si chiude dopo tre giorni
+  consecutivi di dati verificati sul server.)*
 
 ## Fase 1 — Primo cruscotto
 

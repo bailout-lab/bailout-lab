@@ -81,6 +81,12 @@ uv run python -m bailout_lab.pianificatore           # ciclo continuo, Ctrl+C pe
 uv run python -m bailout_lab.pianificatore salute    # 0 = sano
 ```
 
+Ogni raccoglitore è un modulo `bailout_lab.raccolta.<nome>` con una funzione `raccogli` (la fonte
+si passa come argomento, così i test non usano internet) e un `main`. Si lancia a mano con
+`uv run python -m bailout_lab.raccolta.<nome>`. Un valore si registra con l'istante in cui lo
+abbiamo conosciuto, e uno già noto e identico non si riscrive. Lo stato dell'archivio si controlla
+con `uv run python -m bailout_lab.raccolta.controllo`.
+
 ## Lingua
 
 La documentazione è in italiano. Issue e pull request in inglese sono benvenute.
