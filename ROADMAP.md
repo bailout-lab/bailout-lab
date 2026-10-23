@@ -20,8 +20,10 @@ il precedente è chiuso davvero. Le date sono indicative.
 - [x] **P03 — Censimento delle fonti:** per ogni fonte una chiamata vera; endpoint, frequenza,
   inizio dello storico, limiti e come citarla, in [`fonti/`](fonti/README.md). *(23/10/2026: 14
   fonti censite; 12 rispondono; Farside e Google Trends non sono utilizzabili da script.)*
-- [ ] **P04 — Scheletro del codice:** progetto Python, formato dell'archivio «come era noto»
-  (Parquet + DuckDB), test automatici.
+- [x] **P04 — Scheletro del codice:** progetto Python, formato dell'archivio «come era noto»
+  (Parquet + DuckDB), test automatici. *(23/10/2026: pacchetto `bailout_lab`, archivio che salva
+  ogni valore con l'istante in cui era disponibile e lo rilegge «come era noto» a una data;
+  controlli di stile e test nei controlli obbligatori.)*
 - [ ] **P05 — Server del progetto:** i raccoglitori girano da soli, con controllo di salute.
 - [ ] **P06 — Prima registrazione «come era noto»:** prezzo giornaliero, macro di base, prime
   metriche on-chain, fee, flussi ETF. Da qui la registrazione non si spegne più.
