@@ -72,6 +72,15 @@ uv run pytest               # test
 
 I test non devono scaricare dati da internet né scrivere fuori da una cartella temporanea.
 
+I raccoglitori girano col pianificatore, che li lancia a intervalli fissi e scrive lo stato in
+`dati/salute.json`. Un nuovo raccoglitore si aggiunge con una riga in `LAVORI`
+(`bailout_lab/pianificatore.py`). Per provarlo in locale:
+
+```sh
+uv run python -m bailout_lab.pianificatore           # ciclo continuo, Ctrl+C per fermarlo
+uv run python -m bailout_lab.pianificatore salute    # 0 = sano
+```
+
 ## Lingua
 
 La documentazione è in italiano. Issue e pull request in inglese sono benvenute.

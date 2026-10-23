@@ -24,7 +24,10 @@ il precedente è chiuso davvero. Le date sono indicative.
   (Parquet + DuckDB), test automatici. *(23/10/2026: pacchetto `bailout_lab`, archivio che salva
   ogni valore con l'istante in cui era disponibile e lo rilegge «come era noto» a una data;
   controlli di stile e test nei controlli obbligatori.)*
-- [ ] **P05 — Server del progetto:** i raccoglitori girano da soli, con controllo di salute.
+- [x] **P05 — Server del progetto:** i raccoglitori girano da soli, con controllo di salute.
+  *(23/10/2026: pianificatore `bailout_lab.pianificatore` acceso sul server del progetto, che
+  scarica il codice da questo repo a un commit preciso; file di salute, riavvio automatico e
+  avviso se l'archivio supera 20 GB.)*
 - [ ] **P06 — Prima registrazione «come era noto»:** prezzo giornaliero, macro di base, prime
   metriche on-chain, fee, flussi ETF. Da qui la registrazione non si spegne più.
 
