@@ -1,0 +1,74 @@
+{
+  "richiesta": {
+    "candele": "https://api.bybit.com/v5/market/kline?category=spot&symbol=BTCUSDT&interval=D&limit=3",
+    "funding": "https://api.bybit.com/v5/market/funding/history?category=linear&symbol=BTCUSDT&limit=3"
+  },
+  "data_censimento": "2026-10-23",
+  "risposta": {
+    "candele": {
+      "retCode": 0,
+      "retMsg": "OK",
+      "result": {
+        "category": "spot",
+        "symbol": "BTCUSDT",
+        "list": [
+          [
+            "1792713600000",
+            "81416.1",
+            "82066.2",
+            "81090.4",
+            "81323.2",
+            "8961.487916",
+            "731399271.11936561"
+          ],
+          [
+            "1792627200000",
+            "84092.6",
+            "84374.1",
+            "80927.9",
+            "81416.1",
+            "11737.858947",
+            "963256306.7228999"
+          ],
+          [
+            "1792540800000",
+            "83025.7",
+            "84906.1",
+            "82632.2",
+            "84092.6",
+            "10875.135544",
+            "911650919.16708856"
+          ]
+        ]
+      },
+      "retExtInfo": {},
+      "time": 1792784444766
+    },
+    "funding": {
+      "retCode": 0,
+      "retMsg": "OK",
+      "result": {
+        "category": "linear",
+        "list": [
+          {
+            "symbol": "BTCUSDT",
+            "fundingRate": "0.00004775",
+            "fundingRateTimestamp": "1792771200000"
+          },
+          {
+            "symbol": "BTCUSDT",
+            "fundingRate": "0.00003696",
+            "fundingRateTimestamp": "1792742400000"
+          },
+          {
+            "symbol": "BTCUSDT",
+            "fundingRate": "0.00003524",
+            "fundingRateTimestamp": "1792713600000"
+          }
+        ]
+      },
+      "retExtInfo": {},
+      "time": 1792784445003
+    }
+  }
+}

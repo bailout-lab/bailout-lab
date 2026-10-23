@@ -1,0 +1,28 @@
+{
+  "richiesta": "https://api.alternative.me/fng/?limit=3",
+  "data_censimento": "2026-10-23",
+  "risposta": {
+    "name": "Fear and Greed Index",
+    "data": [
+      {
+        "value": "50",
+        "value_classification": "Neutral",
+        "timestamp": "1792713600",
+        "time_until_update": "15552"
+      },
+      {
+        "value": "68",
+        "value_classification": "Greed",
+        "timestamp": "1792627200"
+      },
+      {
+        "value": "63",
+        "value_classification": "Greed",
+        "timestamp": "1792540800"
+      }
+    ],
+    "metadata": {
+      "error": null
+    }
+  }
+}

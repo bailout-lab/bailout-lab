@@ -1,0 +1,11 @@
+{
+  "richiesta": "https://gamma-api.polymarket.com/markets?limit=1",
+  "data_censimento": "2026-10-23",
+  "nota": "Un solo mercato, a titolo di forma; non è un mercato su Bitcoin.",
+  "risposta": {
+    "question": "Xi Jinping out before 2027?",
+    "outcomes": "[\"Yes\", \"No\"]",
+    "outcomePrices": "[\"0.0265\", \"0.9735\"]",
+    "endDate": "2027-01-01T04:59:00Z"
+  }
+}

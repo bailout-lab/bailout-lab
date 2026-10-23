@@ -33,6 +33,15 @@ while IFS= read -r f; do
   [ "$dimensione" -le 5242880 ] || errore "file oltre 5 MB: $f"
 done < <(git ls-files)
 
+# Schede delle fonti: ogni link a un esempio o a un'altra scheda deve portare a un file che esiste
+if [ -d fonti ]; then
+  while IFS= read -r riga; do
+    scheda=${riga%%:*}; rif=${riga#*:}
+    [ -f "fonti/$rif" ] || errore "$scheda rimanda a un file che non esiste: fonti/$rif"
+  done < <(grep -ohE '\]\((esempi/[A-Za-z0-9._-]+\.json|[A-Za-z0-9-]+\.md)\)' fonti/*.md \
+           | sed -E 's/^\]\(//; s/\)$//' | sort -u | sed 's/^/fonti:/')
+fi
+
 if [ "$errori" -gt 0 ]; then
   echo "$errori problemi trovati."
   exit 1

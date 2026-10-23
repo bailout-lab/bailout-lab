@@ -1,0 +1,22 @@
+{
+  "richiesta": {
+    "fees": "https://mempool.space/api/v1/fees/recommended",
+    "mempool": "https://mempool.space/api/mempool"
+  },
+  "data_censimento": "2026-10-23",
+  "nota": "fee_histogram omesso per brevità.",
+  "risposta": {
+    "fees": {
+      "fastestFee": 1,
+      "halfHourFee": 1,
+      "hourFee": 1,
+      "economyFee": 1,
+      "minimumFee": 1
+    },
+    "mempool": {
+      "count": 44815,
+      "vsize": 24095760,
+      "total_fee": 3287301
+    }
+  }
+}

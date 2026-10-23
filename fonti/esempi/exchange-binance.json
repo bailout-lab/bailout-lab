@@ -1,0 +1,100 @@
+{
+  "richiesta": {
+    "candele": "https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1d&limit=3",
+    "funding": "https://fapi.binance.com/fapi/v1/fundingRate?symbol=BTCUSDT&limit=3",
+    "open_interest": "https://fapi.binance.com/futures/data/openInterestHist?symbol=BTCUSDT&period=1d&limit=3"
+  },
+  "data_censimento": "2026-10-23",
+  "risposta": {
+    "candele": [
+      [
+        1792540800000,
+        "83028.14000000",
+        "84898.00000000",
+        "82635.32000000",
+        "84093.42000000",
+        "16544.48031000",
+        1792627199999,
+        "1388741748.82311660",
+        3096152,
+        "8138.40380000",
+        "682753995.10599420",
+        "0"
+      ],
+      [
+        1792627200000,
+        "84093.42000000",
+        "84377.21000000",
+        "80939.54000000",
+        "81416.09000000",
+        "19476.41499000",
+        1792713599999,
+        "1600912152.13579610",
+        3457221,
+        "8822.10346000",
+        "724218969.28380430",
+        "0"
+      ],
+      [
+        1792713600000,
+        "81416.09000000",
+        "82060.88000000",
+        "81099.00000000",
+        "81326.75000000",
+        "10182.98600000",
+        1792799999999,
+        "831299119.38762900",
+        1978742,
+        "5357.19653000",
+        "437333173.41791740",
+        "0"
+      ]
+    ],
+    "funding": [
+      {
+        "symbol": "BTCUSDT",
+        "fundingTime": 1792713600006,
+        "fundingRate": "0.00005369",
+        "markPrice": "81384.60000000",
+        "rateType": "Regular"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "fundingTime": 1792742400004,
+        "fundingRate": "0.00007075",
+        "markPrice": "81542.50000000",
+        "rateType": "Regular"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "fundingTime": 1792771200005,
+        "fundingRate": "0.00010000",
+        "markPrice": "81657.13073913",
+        "rateType": "Regular"
+      }
+    ],
+    "open_interest": [
+      {
+        "symbol": "BTCUSDT",
+        "sumOpenInterest": "94818.82800000",
+        "sumOpenInterestValue": "7868521477.81440000",
+        "CMCCirculatingSupply": "20098843.00000000",
+        "timestamp": 1792540800000
+      },
+      {
+        "symbol": "BTCUSDT",
+        "sumOpenInterest": "98001.94100000",
+        "sumOpenInterestValue": "8237053340.85590000",
+        "CMCCirculatingSupply": "20098843.00000000",
+        "timestamp": 1792627200000
+      },
+      {
+        "symbol": "BTCUSDT",
+        "sumOpenInterest": "95911.62900000",
+        "sumOpenInterestValue": "7805734438.41160700",
+        "CMCCirculatingSupply": "20101259.00000000",
+        "timestamp": 1792713600000
+      }
+    ]
+  }
+}

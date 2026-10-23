@@ -1,0 +1,69 @@
+{
+  "richiesta": {
+    "date_di_revisione": "https://api.stlouisfed.org/fred/series/vintagedates?series_id=CPIAUCSL&file_type=json&limit=3&sort_order=desc&api_key=<CHIAVE>",
+    "valori_come_noti_a_gennaio_2024": "https://api.stlouisfed.org/fred/series/observations?series_id=WALCL&file_type=json&realtime_start=2024-01-01&realtime_end=2024-01-10&observation_start=2023-12-01&api_key=<CHIAVE>"
+  },
+  "data_censimento": "2026-10-23",
+  "risposta": {
+    "date_di_revisione": {
+      "realtime_start": "1776-07-04",
+      "realtime_end": "9999-12-31",
+      "order_by": "vintage_date",
+      "sort_order": "desc",
+      "count": 670,
+      "offset": 0,
+      "limit": 3,
+      "vintage_dates": [
+        "2026-10-14",
+        "2026-09-11",
+        "2026-08-12"
+      ]
+    },
+    "valori_come_noti_a_gennaio_2024": {
+      "realtime_start": "2024-01-01",
+      "realtime_end": "2024-01-10",
+      "observation_start": "2023-12-01",
+      "observation_end": "9999-12-31",
+      "units": "lin",
+      "output_type": 1,
+      "file_type": "json",
+      "order_by": "observation_date",
+      "sort_order": "asc",
+      "count": 5,
+      "offset": 0,
+      "limit": 100000,
+      "observations": [
+        {
+          "realtime_start": "2024-01-01",
+          "realtime_end": "2024-01-10",
+          "date": "2023-12-06",
+          "value": "7737385.0"
+        },
+        {
+          "realtime_start": "2024-01-01",
+          "realtime_end": "2024-01-10",
+          "date": "2023-12-13",
+          "value": "7739566.0"
+        },
+        {
+          "realtime_start": "2024-01-01",
+          "realtime_end": "2024-01-10",
+          "date": "2023-12-20",
+          "value": "7724063.0"
+        },
+        {
+          "realtime_start": "2024-01-01",
+          "realtime_end": "2024-01-10",
+          "date": "2023-12-27",
+          "value": "7712781.0"
+        },
+        {
+          "realtime_start": "2024-01-04",
+          "realtime_end": "2024-01-10",
+          "date": "2024-01-03",
+          "value": "7681024.0"
+        }
+      ]
+    }
+  }
+}

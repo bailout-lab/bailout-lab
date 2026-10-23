@@ -1,0 +1,43 @@
+{
+  "richiesta": "https://mempool.space/api/v1/mining/hashrate/3m",
+  "data_censimento": "2026-10-23",
+  "nota": "Serie accorciata a 3 punti.",
+  "risposta": {
+    "currentHashrate": 1.074583291996535e+21,
+    "currentDifficulty": 140577680051919.6,
+    "hashrates_primi_3": [
+      {
+        "timestamp": 1784851200,
+        "avgHashrate": 835828827551481900000
+      },
+      {
+        "timestamp": 1784937600,
+        "avgHashrate": 973339509930562600000
+      },
+      {
+        "timestamp": 1785024000,
+        "avgHashrate": 869433789756279100000
+      }
+    ],
+    "difficulty_primi_3": [
+      {
+        "time": 1785019866,
+        "height": 959616,
+        "difficulty": 126231507121868.2,
+        "adjustment": 0.9926159977912903
+      },
+      {
+        "time": 1786217755,
+        "height": 961632,
+        "difficulty": 127479855693691.4,
+        "adjustment": 1.009889006614685
+      },
+      {
+        "time": 1787446127,
+        "height": 963648,
+        "difficulty": 125807076547197.5,
+        "adjustment": 0.986877977848053
+      }
+    ]
+  }
+}

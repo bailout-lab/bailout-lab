@@ -1,0 +1,35 @@
+{
+  "richiesta": "https://data-api.ecb.europa.eu/service/data/FM/B.U2.EUR.4F.KR.MRR_FR.LEV?lastNObservations=3&format=jsondata",
+  "data_censimento": "2026-10-23",
+  "nota": "Tasso sulle operazioni di rifinanziamento principali; accorciato alle osservazioni e alle date.",
+  "risposta": {
+    "osservazioni": {
+      "0": [
+        2.15,
+        0,
+        0,
+        null,
+        null
+      ],
+      "1": [
+        2.4,
+        0,
+        0,
+        null,
+        null
+      ],
+      "2": [
+        2.65,
+        0,
+        0,
+        null,
+        null
+      ]
+    },
+    "date": [
+      "2025-06-11",
+      "2026-06-17",
+      "2026-09-16"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "richiesta": "https://data.sec.gov/submissions/CIK0001050446.json",
+  "data_censimento": "2026-10-23",
+  "nota": "Richiede uno User-Agent che dichiari chi chiama.",
+  "risposta": {
+    "name": "Strategy Inc",
+    "tickers": [
+      "MSTR",
+      "STRC",
+      "STRD",
+      "STRF",
+      "STRK"
+    ],
+    "ultimi_3": {
+      "form": [
+        "DEFA14A",
+        "DEFA14A",
+        "DEFA14A"
+      ],
+      "filingDate": [
+        "2026-10-20",
+        "2026-10-20",
+        "2026-10-19"
+      ]
+    }
+  }
+}

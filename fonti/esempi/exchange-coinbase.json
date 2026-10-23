@@ -1,0 +1,31 @@
+{
+  "richiesta": "https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=86400",
+  "data_censimento": "2026-10-23",
+  "nota": "Formato [tempo, minimo, massimo, apertura, chiusura, volume]; accorciato a 3 righe su 350.",
+  "risposta": [
+    [
+      1792713600,
+      80943.49,
+      81962,
+      81305.9,
+      81215.5,
+      3738.13512871
+    ],
+    [
+      1792627200,
+      80789.61,
+      84305.25,
+      84024.67,
+      81307.16,
+      7277.26547644
+    ],
+    [
+      1792540800,
+      82535,
+      84856.07,
+      82938.26,
+      84024.67,
+      7643.91983004
+    ]
+  ]
+}

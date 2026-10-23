@@ -1,0 +1,38 @@
+{
+  "richiesta": "https://api.stlouisfed.org/fred/series/observations?series_id=WALCL&file_type=json&limit=3&sort_order=desc&api_key=<CHIAVE>",
+  "data_censimento": "2026-10-23",
+  "risposta": {
+    "realtime_start": "2026-10-22",
+    "realtime_end": "2026-10-22",
+    "observation_start": "1600-01-01",
+    "observation_end": "9999-12-31",
+    "units": "lin",
+    "output_type": 1,
+    "file_type": "json",
+    "order_by": "observation_date",
+    "sort_order": "desc",
+    "count": 1245,
+    "offset": 0,
+    "limit": 3,
+    "observations": [
+      {
+        "realtime_start": "2026-10-22",
+        "realtime_end": "2026-10-22",
+        "date": "2026-10-21",
+        "value": "6753604"
+      },
+      {
+        "realtime_start": "2026-10-22",
+        "realtime_end": "2026-10-22",
+        "date": "2026-10-14",
+        "value": "6755639"
+      },
+      {
+        "realtime_start": "2026-10-22",
+        "realtime_end": "2026-10-22",
+        "date": "2026-10-07",
+        "value": "6747560"
+      }
+    ]
+  }
+}
