@@ -23,7 +23,7 @@ lavoro deve rifare la chiamata prima di fidarsi di un numero.
 | BCE | **funziona** | no | tassi della BCE | [bce.md](bce.md) |
 | CFTC (report COT) | **funziona** | no | posizioni dei grandi operatori sui futures Bitcoin del CME, dal 2018 | [cftc.md](cftc.md) |
 | SEC EDGAR | **funziona con User-Agent dichiarato**; senza è 403 | no | documenti ufficiali di Strategy e delle altre treasury company | [edgar.md](edgar.md) |
-| SoSoValue | **in attesa della chiave** (l'endpoint risponde 401) | sì, gratuita | flussi giornalieri degli ETF spot | [sosovalue.md](sosovalue.md) |
+| SoSoValue | **funziona** (chiave gratuita ottenuta) | sì, gratuita | flussi giornalieri degli ETF spot, 300 giorni per chiamata | [sosovalue.md](sosovalue.md) |
 | Farside | **bloccata** (403, sfida anti-robot) | — | solo controllo a mano | [farside.md](farside.md) |
 | Fear & Greed | **funziona** | no | sentiment giornaliero dal 2018 | [fear-greed.md](fear-greed.md) |
 | Google Trends | **non utilizzabile**: nessuna API ufficiale stabile | — | alternativa candidata: visite Wikipedia | [google-trends.md](google-trends.md) |
@@ -37,6 +37,6 @@ lavoro deve rifare la chiamata prima di fidarsi di un numero.
   coincidono entro lo 0,3 % (vedi [bitview-space.md](bitview-space.md)).
 - **Derivati (P08)**: lo storico gratuito è corto per open interest (Binance 30 giorni) e per le
   liquidazioni (solo le più recenti): serve archiviarli noi da subito, come previsto.
-- **ETF (P22)**: dipende dalla chiave SoSoValue; Farside non è automatizzabile.
+- **ETF (P22)**: SoSoValue funziona ma dà 300 giorni per chiamata (da agosto 2025): lo storico dal 2024 va cercato altrove o con parametri da verificare. Farside non è automatizzabile.
 - **Macro (P09)**: ALFRED funziona e dà le versioni storiche; il prezzo dell'S&P 500 su FRED parte
   solo dal 2016 (limite di licenza), da integrare altrove se serve più indietro.
