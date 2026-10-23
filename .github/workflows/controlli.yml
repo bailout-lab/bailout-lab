@@ -1,0 +1,51 @@
+# Controlli obbligatori per entrare in main: «segreti» e «test».
+# Girano sui runner di GitHub, con permessi di sola lettura; le azioni sono fissate per SHA.
+name: Controlli
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: controlli-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  segreti:
+    name: segreti
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0 # tutta la storia, non solo l'ultimo commit
+          persist-credentials: false
+
+      - name: Installa gitleaks 8.30.1 con impronta verificata
+        env:
+          VERSIONE: 8.30.1
+          SHA256: 551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb
+        run: |
+          curl -sSfL -o "$RUNNER_TEMP/gitleaks.tar.gz" \
+            "https://github.com/gitleaks/gitleaks/releases/download/v${VERSIONE}/gitleaks_${VERSIONE}_linux_x64.tar.gz"
+          echo "${SHA256}  $RUNNER_TEMP/gitleaks.tar.gz" | sha256sum -c -
+          tar -xzf "$RUNNER_TEMP/gitleaks.tar.gz" -C "$RUNNER_TEMP" gitleaks
+
+      - name: Cerca segreti in tutta la storia
+        run: '"$RUNNER_TEMP/gitleaks" git --redact --no-banner -v .'
+
+  test:
+    name: test
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Controlli del repo
+        run: bash test/controlla-repo.sh

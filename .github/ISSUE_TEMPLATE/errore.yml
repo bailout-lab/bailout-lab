@@ -1,0 +1,35 @@
+name: Errore in un dato o in un calcolo
+description: Un valore sbagliato, una scheda imprecisa, un calcolo che non torna.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Grazie della segnalazione. Per un problema di sicurezza non usare questo modulo: segui SECURITY.md.
+  - type: textarea
+    id: cosa
+    attributes:
+      label: Cosa non torna
+      description: Descrivi il problema in poche righe.
+    validations:
+      required: true
+  - type: input
+    id: dove
+    attributes:
+      label: Dove
+      description: Scheda, file o serie interessata.
+      placeholder: es. schede/mvrv.md
+    validations:
+      required: true
+  - type: textarea
+    id: atteso
+    attributes:
+      label: Valore atteso e valore trovato
+      description: Se puoi, indica la data e la fonte con cui hai fatto il confronto.
+    validations:
+      required: true
+  - type: textarea
+    id: altro
+    attributes:
+      label: Altro
+      description: Link, grafici, calcoli fatti a mano.

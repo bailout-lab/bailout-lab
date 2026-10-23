@@ -1,0 +1,7 @@
+# Aggiornamenti delle azioni fissate per SHA: arrivano come pull request e passano dai controlli.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

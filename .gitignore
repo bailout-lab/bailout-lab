@@ -1,0 +1,35 @@
+# Segreti: solo .env.example entra nel repo
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Archivio dei dati: resta fuori, si ricrea con gli script
+archivio/
+dati/
+*.parquet
+*.duckdb
+*.duckdb.wal
+*.sqlite
+*.db
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Editor e sistema
+.DS_Store
+.idea/
+.vscode/
+*.swp

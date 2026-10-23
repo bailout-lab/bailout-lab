@@ -1,0 +1,30 @@
+name: Proposta di un dato o di una scheda
+description: Un dato nuovo da raccogliere o una scheda di studio da scrivere.
+labels: [enhancement]
+body:
+  - type: input
+    id: dato
+    attributes:
+      label: Il dato
+      placeholder: es. Coinbase premium
+    validations:
+      required: true
+  - type: input
+    id: fonte
+    attributes:
+      label: Fonte gratuita
+      description: Da dove si prende, senza servizi a pagamento.
+    validations:
+      required: true
+  - type: textarea
+    id: perche
+    attributes:
+      label: Perché può essere utile
+      description: Su quale orizzonte (giorno, settimana, mese, anno) e con quale idea.
+    validations:
+      required: true
+  - type: textarea
+    id: verifica
+    attributes:
+      label: Come si verifica
+      description: Come capiremmo se il dato dice davvero qualcosa sul prezzo.

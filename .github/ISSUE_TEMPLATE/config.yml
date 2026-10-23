@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Segnalare un problema di sicurezza
+    url: https://github.com/bailout-lab/bailout-lab/security/advisories/new
+    about: In privato, non con una issue pubblica.
