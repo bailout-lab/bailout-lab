@@ -60,6 +60,18 @@ gitleaks git --pre-commit --staged --redact
 
 I controlli automatici rifanno comunque la stessa verifica su tutta la storia.
 
+Il codice è Python (3.12 o più recente) e si gestisce con [uv](https://docs.astral.sh/uv/).
+In locale, prima di aprire la pull request:
+
+```sh
+uv sync                     # installa le dipendenze bloccate
+uv run ruff check .         # controllo dello stile
+uv run ruff format --check .
+uv run pytest               # test
+```
+
+I test non devono scaricare dati da internet né scrivere fuori da una cartella temporanea.
+
 ## Lingua
 
 La documentazione è in italiano. Issue e pull request in inglese sono benvenute.

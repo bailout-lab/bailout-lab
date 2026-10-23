@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Controlli di base del repo: file obbligatori presenti, nessun segreto o dato pesante tracciato.
-# Dal passo P04 si affiancano i test Python.
+# I test Python stanno in tests/ e girano con `uv run pytest` (vedi CONTRIBUTING.md).
 set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"
 
