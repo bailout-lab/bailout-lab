@@ -35,7 +35,11 @@ il precedente è chiuso davvero. Le date sono indicative.
 
 ## Fase 1 — Primo cruscotto
 
-- [ ] **P07 — Storico dei prezzi** da più exchange, con i buchi dichiarati.
+- [x] **P07 — Storico dei prezzi** da più exchange, con i buchi dichiarati. *(24/10/2026:
+  giornaliero continuo e senza buchi da Coinbase (dal 2015), Binance (2017), OKX (2018), Coin
+  Metrics e bitview (2010); Coinbase e Coin Metrics concordano entro lo 0,5 % nel 95,8 % dei giorni
+  dal 2019. Al minuto Binance, OKX e Coinbase si caricano da soli sul server. Dettagli in
+  [`fonti/storico-prezzi.md`](fonti/storico-prezzi.md).)*
 - [ ] **P08 — Derivati:** funding, open interest, basis, long/short, volatilità implicita.
 - [ ] **P09 — Macro e calendario,** con le versioni storiche dei dati rivisti.
 - [ ] **P10 — On-chain di base:** MVRV, Realized Price, SOPR, Puell, hashrate, confrontati fra
