@@ -109,3 +109,13 @@ def test_osservazioni_non_valide_vengono_rifiutate(campi):
 def test_nessun_file_provvisorio_resta_dopo_la_scrittura(tmp_path):
     Archivio(tmp_path).scrivi([osservazione()])
     assert not list(tmp_path.rglob("*.tmp"))
+
+
+def test_ultimo_istante_guarda_il_mese_piu_recente(tmp_path):
+    a = Archivio(tmp_path)
+    assert a.ultimo_istante("s") is None
+    giorni = [datetime(2026, 8, 31, tzinfo=UTC), datetime(2026, 10, 2, tzinfo=UTC)]
+    giorni.append(datetime(2026, 10, 9, tzinfo=UTC))
+    a.scrivi(Osservazione("s", g, g, 1.0, "f", "1") for g in giorni)
+    assert a.ultimo_istante("s") == giorni[-1]
+    assert a.percorsi("s") and all(p.endswith(".parquet") for p in a.percorsi("s"))
