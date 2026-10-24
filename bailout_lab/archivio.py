@@ -91,18 +91,18 @@ class Archivio:
         con = duckdb.connect()
         try:
             con.execute(f"CREATE TABLE nuove ({_SCHEMA})")
-            con.executemany(
-                "INSERT INTO nuove VALUES (?, ?, ?, ?, ?, ?)",
+            # Colonne intere con unnest: molto più veloce di una riga per volta (milioni di righe).
+            con.execute(
+                "INSERT INTO nuove SELECT unnest(?::VARCHAR[]), unnest(?::TIMESTAMP[]), "
+                "unnest(?::TIMESTAMP[]), unnest(?::DOUBLE[]), unnest(?::VARCHAR[]), "
+                "unnest(?::VARCHAR[])",
                 [
-                    (
-                        o.serie,
-                        _naive_utc(o.istante_valore),
-                        _naive_utc(o.disponibile_dal),
-                        float(o.valore),
-                        o.fonte,
-                        o.versione,
-                    )
-                    for o in righe
+                    [o.serie for o in righe],
+                    [_naive_utc(o.istante_valore) for o in righe],
+                    [_naive_utc(o.disponibile_dal) for o in righe],
+                    [float(o.valore) for o in righe],
+                    [o.fonte for o in righe],
+                    [o.versione for o in righe],
                 ],
             )
             # Duplicati dentro la stessa scrittura: ne resta uno solo per chiave.

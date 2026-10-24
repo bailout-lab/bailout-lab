@@ -112,10 +112,10 @@ def test_minuto_riprende_dall_ultimo_e_scrive_solo_il_nuovo(tmp_path):
     ultimo = a.ultimo_istante("btc_usd_prova_1m_chiusura")
     assert ultimo == t(2026, 10, 23, 10, 29)
     chiamate.clear()
-    seconda = lancia(a, fonte, MINUTO, ora=t(2026, 10, 23, 11, 0))
-    assert chiamate == [t(2026, 10, 23, 10, 30)]  # riparte subito dopo l'ultima, non da capo
-    assert seconda.scritte == 30 * 5
-    assert len(a.leggi("btc_usd_prova_1m_chiusura")) == 60
+    seconda = lancia(a, fonte, MINUTO, ora=t(2026, 10, 23, 13, 40))
+    assert chiamate[0] == t(2026, 10, 23, 10, 30)  # riparte subito dopo l'ultima, non da capo
+    assert seconda.scritte == 190 * 5
+    assert len(a.leggi("btc_usd_prova_1m_chiusura")) == 220
 
 
 def test_minuto_campi_sfasati_dopo_una_scrittura_interrotta_non_duplicano(tmp_path):
@@ -255,3 +255,13 @@ def test_controllo_minuti_conta_i_buchi(tmp_path):
     primo, ultimo, n, buchi = cs.minuti(a, "btc_usd_coinbase_1m_chiusura")
     assert (primo, ultimo, n) == (minuti[0], minuti[-1], 5)
     assert [(b.da, b.mancanti) for b in buchi] == [(minuti[2], 4)]
+
+
+def test_minuto_a_regime_salta_il_giro_finche_non_passano_tre_ore(tmp_path):
+    fonte, chiamate = fonte_finta(candele_per_pagina=100)
+    a = Archivio(tmp_path)
+    lancia(a, fonte, MINUTO, ora=t(2026, 10, 23, 10, 30))  # ultima candela: 10:29
+    chiamate.clear()
+    esito = lancia(a, fonte, MINUTO, ora=t(2026, 10, 23, 12, 0))
+    assert chiamate == [] and esito.completo and esito.scritte == 0
+    assert lancia(a, fonte, MINUTO, ora=t(2026, 10, 23, 13, 40)).scritte > 0
