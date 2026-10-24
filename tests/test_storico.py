@@ -265,3 +265,14 @@ def test_minuto_a_regime_salta_il_giro_finche_non_passano_tre_ore(tmp_path):
     esito = lancia(a, fonte, MINUTO, ora=t(2026, 10, 23, 12, 0))
     assert chiamate == [] and esito.completo and esito.scritte == 0
     assert lancia(a, fonte, MINUTO, ora=t(2026, 10, 23, 13, 40)).scritte > 0
+
+
+def test_giorno_completa_la_storia_anche_se_la_serie_ha_gia_gli_ultimi_giorni(tmp_path):
+    fonte, _ = fonte_finta(candele_per_pagina=30)
+    a = Archivio(tmp_path)
+    # come in P06: la serie esiste già, ma solo con gli ultimi giorni
+    ultimi = [Candela(t(2026, 10, g), 1, 2, 0.5, 1.5, 4) for g in (20, 21, 22)]
+    storico._scrivi(a, fonte, GIORNO, ultimi, ORA, {})
+    assert len(a.leggi("btc_usd_prova_chiusura")) == 3
+    lancia(a, fonte, GIORNO)
+    assert len(a.leggi("btc_usd_prova_chiusura")) == 22  # dal 1° ottobre al 22

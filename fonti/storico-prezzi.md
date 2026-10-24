@@ -23,10 +23,10 @@ Kraken non c'è: la sua API dà soltanto le ultime 720 candele, quindi non offre
 
 ## Come si riprende
 
-Ogni lancio riparte dall'ultimo istante già salvato e si ferma allo scadere del tempo: il primo
-caricamento di anni di candele al minuto richiede alcuni lanci, poi ogni giro legge solo le ultime
-ore. Le serie giornaliere rileggono gli ultimi 10 giorni: se una fonte corregge un valore nasce
-una nuova versione, come nel resto dell'archivio.
+Al minuto ogni lancio riparte dall'ultimo istante già salvato e si ferma allo scadere del tempo:
+il primo caricamento di anni di candele richiede alcune ore, poi il lavoro scrive ogni tre ore.
+Le serie giornaliere (una dozzina di chiamate) rileggono tutta la storia a ogni giro: se una fonte
+corregge un valore nasce una nuova versione, come nel resto dell'archivio.
 
 ## Una precisione sul «come era noto»
 
