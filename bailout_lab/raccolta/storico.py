@@ -4,8 +4,9 @@
     python -m bailout_lab.raccolta.storico minuto <exchange>   # al minuto di un exchange
 
 Al minuto ogni lancio riparte dall'ultimo istante già nell'archivio e si ferma allo scadere
-del tempo concesso (il giornaliero, poche chiamate, rilegge sempre tutto): il primo caricamento di anni di candele al minuto richiede
-qualche lancio, poi ogni giro legge solo gli ultimi minuti. Si registrano solo candele chiuse.
+del tempo concesso (il giornaliero, poche chiamate, rilegge sempre tutto): il primo
+caricamento di anni di candele al minuto richiede qualche lancio, poi ogni giro legge solo gli
+ultimi minuti. Si registrano solo candele chiuse.
 
 Onestà sulla data di disponibilità: lo storico caricato oggi ha `disponibile_dal` = istante in
 cui l'abbiamo letto, non quello in cui l'exchange lo pubblicò. Per le candele degli exchange,
