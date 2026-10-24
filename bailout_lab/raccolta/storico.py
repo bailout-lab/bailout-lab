@@ -3,9 +3,10 @@
     python -m bailout_lab.raccolta.storico giorno              # giornaliero, tutte le fonti
     python -m bailout_lab.raccolta.storico minuto <exchange>   # al minuto di un exchange
 
-Ogni lancio riparte da dove si era fermato (l'ultimo istante già nell'archivio) e si ferma
-allo scadere del tempo concesso: il primo caricamento di anni di candele al minuto richiede
-qualche lancio, poi ogni giro legge solo gli ultimi minuti. Si registrano solo candele chiuse.
+Al minuto ogni lancio riparte dall'ultimo istante già nell'archivio e si ferma allo scadere
+del tempo concesso (il giornaliero, poche chiamate, rilegge sempre tutto): il primo
+caricamento di anni di candele al minuto richiede qualche lancio, poi ogni giro legge solo gli
+ultimi minuti. Si registrano solo candele chiuse.
 
 Onestà sulla data di disponibilità: lo storico caricato oggi ha `disponibile_dal` = istante in
 cui l'abbiamo letto, non quello in cui l'exchange lo pubblicò. Per le candele degli exchange,
@@ -27,7 +28,6 @@ from bailout_lab.raccolta import bitview, comune
 MINUTO = timedelta(minutes=1)
 GIORNO = timedelta(days=1)
 CAMPI = ("apertura", "massimo", "minimo", "chiusura", "volume")  # volume in BTC
-RILETTURA_GIORNI = 10  # giorni già salvati da rileggere: se una fonte corregge, nasce una versione
 SOGLIA_SCRITTURA = 20_000  # candele da accumulare prima di scrivere (≈ due settimane al minuto)
 ATTESA_MINUTO = timedelta(hours=3)  # a regime si scrive ogni tre ore: pochi file, non uno all'ora
 TEMPO_DEFAULT = 2700  # secondi di lavoro per lancio al minuto; il pianificatore ne concede di più
@@ -210,10 +210,14 @@ def raccogli_candele(
         esito.completo = True  # già al passo: niente da leggere, niente file piccoli
         esito.fino_a = ultimi["chiusura"]
         return esito
-    # Basta un campo senza dati per ripartire dall'inizio: la scrittura salta ciò che c'è già.
-    da = inizio if None in ultimi.values() else min(ultimi.values()) + passo  # type: ignore[type-var]
     if passo == GIORNO:
-        da = max(inizio, da - RILETTURA_GIORNI * GIORNO)
+        # Poche chiamate (anni di giorni in una dozzina di pagine): si rilegge sempre tutto. Così
+        # la storia si completa anche se la serie esisteva già con gli ultimi giorni (P06) e una
+        # correzione della fonte diventa una nuova versione.
+        da = inizio
+    else:
+        # Basta un campo senza dati per ripartire dall'inizio: la scrittura salta ciò che c'è già.
+        da = inizio if None in ultimi.values() else min(ultimi.values()) + passo  # type: ignore[type-var]
     accumulo: list[Candela] = []
     try:
         while da + passo <= ora and orologio() < scadenza:
