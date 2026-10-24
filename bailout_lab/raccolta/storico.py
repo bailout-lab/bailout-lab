@@ -29,6 +29,7 @@ GIORNO = timedelta(days=1)
 CAMPI = ("apertura", "massimo", "minimo", "chiusura", "volume")  # volume in BTC
 RILETTURA_GIORNI = 10  # giorni già salvati da rileggere: se una fonte corregge, nasce una versione
 SOGLIA_SCRITTURA = 20_000  # candele da accumulare prima di scrivere (≈ due settimane al minuto)
+ATTESA_MINUTO = timedelta(hours=3)  # a regime si scrive ogni tre ore: pochi file, non uno all'ora
 TEMPO_DEFAULT = 2700  # secondi di lavoro per lancio al minuto; il pianificatore ne concede di più
 
 COIN_METRICS = "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics"
@@ -204,6 +205,11 @@ def raccogli_candele(
     esito = Esito()
     inizio = fonte.inizio_giorno if passo == GIORNO else fonte.inizio_minuto
     ultimi = {c: archivio.ultimo_istante(nome_serie(fonte, passo, c)) for c in CAMPI}
+    pieno = None not in ultimi.values()
+    if passo == MINUTO and pieno and ora - min(ultimi.values()) < ATTESA_MINUTO:  # type: ignore[type-var]
+        esito.completo = True  # già al passo: niente da leggere, niente file piccoli
+        esito.fino_a = ultimi["chiusura"]
+        return esito
     # Basta un campo senza dati per ripartire dall'inizio: la scrittura salta ciò che c'è già.
     da = inizio if None in ultimi.values() else min(ultimi.values()) + passo  # type: ignore[type-var]
     if passo == GIORNO:

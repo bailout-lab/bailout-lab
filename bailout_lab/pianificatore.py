@@ -59,25 +59,19 @@ LAVORI: tuple[Lavoro, ...] = (
     Lavoro("etf", "bailout_lab.raccolta.etf", timedelta(hours=3)),
     Lavoro("fred", "bailout_lab.raccolta.fred", timedelta(hours=6)),
     Lavoro("mempool", "bailout_lab.raccolta.mempool", timedelta(hours=6)),
-    # Storico dei prezzi (P07). Al minuto il primo caricamento richiede qualche lancio da 45 min;
-    # poi ogni giro legge solo le ultime ore. Un lavoro per exchange: uno lento non ferma gli altri.
+    # Storico dei prezzi (P07). Al minuto il primo caricamento richiede più lanci da 45 minuti, che
+    # si susseguono ogni 50; a regime il lavoro salta i giri finché non passano tre ore dall'ultima
+    # candela salvata. Un lavoro per exchange: uno lento non ferma gli altri.
     Lavoro("storico_giorno", "bailout_lab.raccolta.storico", timedelta(hours=6), ("giorno",), 900),
-    Lavoro(
-        "minuto_binance",
-        "bailout_lab.raccolta.storico",
-        timedelta(hours=3),
-        ("minuto", "binance"),
-        3000,
-    ),
-    Lavoro(
-        "minuto_okx", "bailout_lab.raccolta.storico", timedelta(hours=3), ("minuto", "okx"), 3000
-    ),
-    Lavoro(
-        "minuto_coinbase",
-        "bailout_lab.raccolta.storico",
-        timedelta(hours=3),
-        ("minuto", "coinbase"),
-        3000,
+    *(
+        Lavoro(
+            f"minuto_{n}",
+            "bailout_lab.raccolta.storico",
+            timedelta(minutes=50),
+            ("minuto", n),
+            3000,
+        )
+        for n in ("binance", "okx", "coinbase")
     ),
 )
 
