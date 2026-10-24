@@ -131,6 +131,30 @@ class Archivio:
         finally:
             con.close()
 
+    def percorsi(self, serie: str) -> list[str]:
+        """I file Parquet di una serie, per interrogarli direttamente con DuckDB."""
+        if not _NOME_SERIE.fullmatch(serie):
+            raise ValueError(f"nome di serie non valido: {serie!r}")
+        return sorted(str(p) for p in (self.radice / f"serie={serie}").glob("mese=*/*.parquet"))
+
+    def ultimo_istante(self, serie: str) -> datetime | None:
+        """Istante del valore più recente di una serie, leggendo solo il mese più recente.
+
+        Serve a riprendere una raccolta lunga senza rileggere tutta la storia.
+        """
+        file_serie = self.percorsi(serie)
+        if not file_serie:
+            return None
+        ultimo_mese = max(Path(p).parent.name for p in file_serie)
+        recenti = [p for p in file_serie if Path(p).parent.name == ultimo_mese]
+        con = duckdb.connect()
+        try:
+            massimo = con.execute("SELECT max(istante_valore) FROM read_parquet(?)", [recenti])
+            valore = massimo.fetchone()[0]
+        finally:
+            con.close()
+        return None if valore is None else _aware_utc(valore)
+
     def leggi(self, serie: str, noto_al: datetime | None = None) -> list[Osservazione]:
         """Restituisce la serie com'era nota a `noto_al` (default: oggi), ordinata per istante.
 
