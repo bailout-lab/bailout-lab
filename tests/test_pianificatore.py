@@ -1,4 +1,6 @@
+import io
 import json
+import urllib.error
 from datetime import UTC, datetime, timedelta
 
 from bailout_lab import pianificatore as p
@@ -15,6 +17,15 @@ def test_dovuto_se_mai_partito_o_intervallo_passato():
     assert p.dovuto(lav, {}, ORA)
     assert not p.dovuto(lav, {"inizio": (ORA - timedelta(minutes=59)).isoformat()}, ORA)
     assert p.dovuto(lav, {"inizio": (ORA - timedelta(hours=1)).isoformat()}, ORA)
+
+
+def test_dovuto_riprova_presto_dopo_un_fallimento():
+    lav = p.Lavoro(nome="prova", modulo="this", ogni=timedelta(hours=6))
+    fallito = {"inizio": (ORA - timedelta(minutes=15)).isoformat(), "esito": "fallito"}
+    assert p.dovuto(lav, fallito, ORA)
+    assert not p.dovuto(lav, {**fallito, "esito": "ok"}, ORA)
+    presto = {"inizio": (ORA - timedelta(minutes=14)).isoformat(), "esito": "tempo scaduto"}
+    assert not p.dovuto(lav, presto, ORA)
 
 
 def test_esegui_registra_esito_ok(tmp_path):
@@ -80,6 +91,22 @@ def test_avvisi_non_si_ripetono_entro_un_giorno(tmp_path):
     assert avvisi.manda("archivio", "archivio pieno", ORA + timedelta(hours=24))
     assert avvisi.manda("altro", "altro problema", ORA)
     assert len(inviati) == 3
+
+
+def test_avviso_rifiutato_da_telegram_dice_codice_e_motivo_senza_token(monkeypatch, capsys):
+    monkeypatch.setenv("AVVISI_TELEGRAM_TOKEN", "123:segreto")
+    monkeypatch.setenv("AVVISI_TELEGRAM_CHAT", "-100")
+    url = "https://api.telegram.org/bot123:segreto/sendMessage"
+    corpo = b'{"ok": false, "error_code": 400, "description": "Bad Request: chat not found"}'
+
+    def rifiuta(*args, **kwargs):
+        raise urllib.error.HTTPError(url, 400, "Bad Request", {}, io.BytesIO(corpo))
+
+    monkeypatch.setattr(p.urllib.request, "urlopen", rifiuta)
+    p.telegram("prova")
+    uscita = capsys.readouterr().out
+    assert uscita == "avviso non inviato: HTTP 400 Bad Request: chat not found\n"
+    assert "segreto" not in uscita
 
 
 def test_comando_salute(tmp_path, monkeypatch):

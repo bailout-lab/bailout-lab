@@ -26,6 +26,7 @@ import subprocess
 import sys
 import threading
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from collections.abc import Callable
@@ -34,6 +35,7 @@ from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 GIRO = 30  # secondi fra due controlli dei lavori
+RIPROVA = timedelta(minutes=15)  # dopo un fallimento non si aspetta l'intervallo intero
 SALUTE_SCADUTA = timedelta(minutes=3)  # oltre, il ciclo si considera fermo
 MISURA_ARCHIVIO = timedelta(minutes=10)  # contare i file a ogni giro sarebbe lavoro sprecato
 RIPETI_AVVISO = timedelta(hours=24)
@@ -96,9 +98,16 @@ def scrivi_json(percorso: Path, valore: dict) -> None:
 
 
 def dovuto(lavoro: Lavoro, esito: dict, ora: datetime) -> bool:
-    """Vero se il lavoro non è mai partito o se dall'ultimo inizio è passato il suo intervallo."""
+    """Vero se il lavoro non è mai partito o se dall'ultimo inizio è passato il suo intervallo.
+
+    Dopo un fallimento si riprova entro `RIPROVA`: un errore di rete passeggero (per esempio al
+    riavvio del server) non deve lasciare la salute rossa per ore.
+    """
     inizio = esito.get("inizio")
-    return inizio is None or ora - datetime.fromisoformat(inizio) >= lavoro.ogni
+    if inizio is None:
+        return True
+    attesa = lavoro.ogni if esito.get("esito", "ok") == "ok" else min(lavoro.ogni, RIPROVA)
+    return ora - datetime.fromisoformat(inizio) >= attesa
 
 
 def esegui(lavoro: Lavoro, dati: Path, ambiente: dict[str, str] | None = None) -> dict:
@@ -193,6 +202,13 @@ def telegram(testo: str) -> None:
             urllib.parse.urlencode(campi).encode(),
             timeout=15,
         ).read()
+    except urllib.error.HTTPError as e:
+        # Codice e motivo dati da Telegram («chat not found»...); mai l'indirizzo, che ha il token.
+        try:
+            motivo = str(json.loads(e.read()).get("description", ""))[:200]
+        except (OSError, ValueError, AttributeError):
+            motivo = ""
+        print(f"avviso non inviato: HTTP {e.code} {motivo}".rstrip(), flush=True)
     except OSError as e:
         # Mai il messaggio d'errore completo: contiene l'indirizzo, cioè il token.
         print(f"avviso non inviato: {type(e).__name__}", flush=True)
