@@ -17,6 +17,15 @@ def test_dovuto_se_mai_partito_o_intervallo_passato():
     assert p.dovuto(lav, {"inizio": (ORA - timedelta(hours=1)).isoformat()}, ORA)
 
 
+def test_dovuto_riprova_presto_dopo_un_fallimento():
+    lav = p.Lavoro(nome="prova", modulo="this", ogni=timedelta(hours=6))
+    fallito = {"inizio": (ORA - timedelta(minutes=15)).isoformat(), "esito": "fallito"}
+    assert p.dovuto(lav, fallito, ORA)
+    assert not p.dovuto(lav, {**fallito, "esito": "ok"}, ORA)
+    presto = {"inizio": (ORA - timedelta(minutes=14)).isoformat(), "esito": "tempo scaduto"}
+    assert not p.dovuto(lav, presto, ORA)
+
+
 def test_esegui_registra_esito_ok(tmp_path):
     esito = p.esegui(lavoro("this"), tmp_path)
     assert esito["esito"] == "ok"
