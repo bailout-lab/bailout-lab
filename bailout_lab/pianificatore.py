@@ -26,6 +26,7 @@ import subprocess
 import sys
 import threading
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from collections.abc import Callable
@@ -201,6 +202,13 @@ def telegram(testo: str) -> None:
             urllib.parse.urlencode(campi).encode(),
             timeout=15,
         ).read()
+    except urllib.error.HTTPError as e:
+        # Codice e motivo dati da Telegram («chat not found»...); mai l'indirizzo, che ha il token.
+        try:
+            motivo = str(json.loads(e.read()).get("description", ""))[:200]
+        except (OSError, ValueError, AttributeError):
+            motivo = ""
+        print(f"avviso non inviato: HTTP {e.code} {motivo}".rstrip(), flush=True)
     except OSError as e:
         # Mai il messaggio d'errore completo: contiene l'indirizzo, cioè il token.
         print(f"avviso non inviato: {type(e).__name__}", flush=True)

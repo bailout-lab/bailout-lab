@@ -1,4 +1,6 @@
+import io
 import json
+import urllib.error
 from datetime import UTC, datetime, timedelta
 
 from bailout_lab import pianificatore as p
@@ -89,6 +91,22 @@ def test_avvisi_non_si_ripetono_entro_un_giorno(tmp_path):
     assert avvisi.manda("archivio", "archivio pieno", ORA + timedelta(hours=24))
     assert avvisi.manda("altro", "altro problema", ORA)
     assert len(inviati) == 3
+
+
+def test_avviso_rifiutato_da_telegram_dice_codice_e_motivo_senza_token(monkeypatch, capsys):
+    monkeypatch.setenv("AVVISI_TELEGRAM_TOKEN", "123:segreto")
+    monkeypatch.setenv("AVVISI_TELEGRAM_CHAT", "-100")
+    url = "https://api.telegram.org/bot123:segreto/sendMessage"
+    corpo = b'{"ok": false, "error_code": 400, "description": "Bad Request: chat not found"}'
+
+    def rifiuta(*args, **kwargs):
+        raise urllib.error.HTTPError(url, 400, "Bad Request", {}, io.BytesIO(corpo))
+
+    monkeypatch.setattr(p.urllib.request, "urlopen", rifiuta)
+    p.telegram("prova")
+    uscita = capsys.readouterr().out
+    assert uscita == "avviso non inviato: HTTP 400 Bad Request: chat not found\n"
+    assert "segreto" not in uscita
 
 
 def test_comando_salute(tmp_path, monkeypatch):
